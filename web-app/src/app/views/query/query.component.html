@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row p-0">
+
+
+    <div class="col-6 p-0">
+      <h2>Available Features</h2>
+
+      <div cdkDropList #featuresList="cdkDropList" [cdkDropListData]="features" [cdkDropListConnectedTo]="[selectedFeaturesList]"
+        class="d-flex flex-wrap justify-content-start" (cdkDropListDropped)="drop($event)">
+        <div class="m-3" *ngFor="let item of features" cdkDrag [cdkDragDisabled]="isDisabled(item)">
+          <div class="d-flex flex-column justify-content-center ">
+            <img class="align-self-center" src="{{item.imgPath}}" style="height: 50px;width:50px">
+            <p class='text-center text-wrap'>{{item.description}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-6 p-0">
+      <h2>Query Features</h2>
+
+      <div cdkDropList #selectedFeaturesList="cdkDropList" [cdkDropListData]="selectedFeatures" [cdkDropListConnectedTo]="[featuresList]"
+        class="example-list p-2 d-flex flex-wrap justify-content-start" (cdkDropListDropped)="drop($event)">
+        <div class="m-3" *ngFor="let item of selectedFeatures" cdkDrag>
+          <div class="d-flex flex-column justify-content-center ">
+            <img class="align-self-center" src="{{item.imgPath}}" style="height: 50px;width:50px">
+            <p class='text-center'>{{item.description}}</p>
+          </div>
+        </div>
+      </div>
+      <button type="button" (click)="submit()" [disabled]="selectedFeatures.length < 4" class="btn btn-primary">Query</button>
+
+    </div>
+  </div>
